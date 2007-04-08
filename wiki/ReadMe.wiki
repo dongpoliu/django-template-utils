@@ -9,9 +9,13 @@ svn checkout http://django-template-utils.googlecode.com/svn/trunk/ template_uti
 
 If you've already done a checkout using the Google Code instructions, rename the "django-template-utils" directory to "template_utils" -- if you don't, things will break.
 
-==Components==
+==Installing==
 
-There are currently four main pieces to this application; click through to read the full documentation.
+Assuming you've done the SVN checkout from somewhere that's on your Python path, just add `template_utils` to your `INSTALLED_APPS` setting.
+
+==Documentation==
+
+There are currently four main pieces to this application; click any of them to read its full documentation.
 
   # SettingsContextProcessor
   # GenericContentTags
