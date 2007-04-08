@@ -1,0 +1,17 @@
+Given the sheer amount of comment spam floating around the Web, it's fairly common for sites which allow comments to also have some sort of moderation system which allows some comments to be made public and others to remain hidden. Django's built-in comment system provides hooks for this via the `is_public` field which appears on both the `Comment` and `FreeComment` models, but the template tags provided in `django.contrib.comments` do not offer the ability to filter on this field; as a result, you often end up fetching more comments than you need to, and clutter up your template with `if` tags which check the `is_public` field on each comment.
+
+To solve this, `template_utils` provides a tag library called `public_comments`, which contains two tags: `get_public_comment_list` and `get_public_free_comment_list`. The only way they differ from Django's built-in `get_comment_list` and `get_free_comment_list` is that they will _only_ retrieve comment objects with `is_public=True`.
+
+Usage for these tags is almost exactly the same as Django's built-in comment-list tag; for example, if you were doing this before:
+
+{{{
+{% load comments %}
+{% get_free_comment_list for weblog.entry object.id as comment_list %}
+}}}
+
+then you could change to this and leave the rest of your template alone:
+
+{{{
+{% load public_comments %}
+{% get_public_free_comment_list for weblog.entry object.id as comment_list %}
+}}}
