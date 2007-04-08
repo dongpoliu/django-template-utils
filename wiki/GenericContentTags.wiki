@@ -18,7 +18,7 @@ So to retrieve the latest `FreeComment` posted and store it in a variable called
 
 ===get_latest_objects===
 
-This tag simply retrieves the "latest" objects from a model, using the model's default ordering. The syntax looks like this:
+This tag retrieves the "latest" objects from a model, using the model's default ordering. The syntax looks like this:
 
 {{{
 {% get_latest_objects [app_name].[model_name] [num] as [varname] %}
@@ -46,7 +46,7 @@ So to retrieve a random `FreeComment` and store it in the context variable `rand
 
 ===get_random_objects==
 
-This tag covers a number of objects, randomly selected, from any model; under the hood, it uses `order_by('?')` to get objects randomly ordered.
+This tag retrieves a number of objects, randomly selected, from any model; under the hood, it uses `order_by('?')` to get objects randomly ordered.
 
 The syntax looks like this:
 
