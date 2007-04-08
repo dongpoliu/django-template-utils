@@ -1,0 +1,14 @@
+Django makes it easy to have certain variables appear in every template context automatically, through the use of `RequestContext` and [http://www.djangoproject.com/documentation/templates_python/#subclassing-context-requestcontext context processors], but one common case that's not covered by the built-in context processors is the need to expose the values of certain settings as template variables.
+
+Inside `template_utils.context_processors` is a function called `settings_processor`; it is not a context processor, but it can _generate_ context-processor functions. To use it, simply import and call it with the names of the settings you want to expose. For example, inside your own application you might create a file called `context_processors.py`, and put the following code in it:
+
+{{{
+from template_utils.context_processors import settings_processor
+
+my_app_settings = settings_processor('INTERNAL_IPS', 'SITE_ID')
+}}}
+
+
+This would generate a context-processor function which adds the values of the `INTERNAL_IPS` and `SITE_ID` settings to each `RequestContext`; to enable it, all you'd need to do is edit your `TEMPLATE_CONTEXT_PROCESSORS` setting to include `myproject.myapp.context_processors.my_app_settings` (replacing "myproject.myapp" with the actual names of your project and application, of course).
+
+By far the most common use case is to expose the `MEDIA_URL` and `ADMIN_MEDIA_PREFIX` settings for use in templates; to make that even easier, a generated context processor for those settings is included with this application. Simply add `template_utils.context_processors.media` to your `TEMPLATE_CONTEXT_PROCESSORS` setting, and `MEDIA_URL` and `ADMIN_MEDIA_PREFIX` will be available to your templates.
