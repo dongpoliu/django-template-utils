@@ -1,0 +1,28 @@
+The Django template system includes built-in tags for comparing equality, but not for doing less-than/greater-than comparisons, so `template_utils` provides a tag library called `comparison` which implements this functionality.
+
+The full set of tags is as follows:
+
+  * `if_less`
+  * `if_less_or_equal`
+  * `if_greater`
+  * `if_greater_or_equal`
+
+Each tag can have an optional `else` clause, and follows this syntax:
+
+{{{
+{% if_less var1 var 1 %}
+...do something...
+{% else %}
+...do something else...
+{% endif_less %}
+}}}
+
+In all cases, `var1` and `var2` can be template variables or literal values; for example, the following (which might appear inside a `for` loop, and uses one of each) will work:
+
+{{{
+{% if_greater_or_equal forloop.counter 4 %}
+<p>This is at least the fifth time through the loop.</p>
+{% else %}
+<p>This is one of the first four times through the loop.</p>
+{% endif_greater_or_equal %}
+}}}
