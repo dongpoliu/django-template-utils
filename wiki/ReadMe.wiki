@@ -4,7 +4,7 @@
 Google Code's recommended download process is a bad idea, as it will get you a directory with the name "django-template-utils". A better tactic is to do this:
 
 {{{
-svn checkout http://django-template-utils.googlecode.com/svn/trunk/ template_utils
+svn checkout http://django-template-utils.googlecode.com/svn/trunk/template_utils
 }}}
 
 If you've already done a checkout using the Google Code instructions, rename the "django-template-utils" directory to "template_utils" -- if you don't, things will break.
