@@ -15,3 +15,5 @@ then you could change to this and leave the rest of your template alone:
 {% load public_comments %}
 {% get_public_free_comment_list for weblog.entry object.id as comment_list %}
 }}}
+
+Similarly, tags for retrieving comment counts are included: `get_public_comment_count` and `get_public_free_comment_count` work the same as Django's built-in comment-count tags, except they only count comments with `is_public=True`.
