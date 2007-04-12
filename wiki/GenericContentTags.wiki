@@ -1,74 +1,90 @@
-A common part of many Django applications is writing a set of template tags which can retrieve objects from the application's models; for example, a weblog application would want to have a tag to retrieve the latest entries, a news site would want a tag to retrieve the latest stories, and so on. Doing this on an application-by-application basis causes clutter and needless duplication, since most of these tags are identical except for the specification of the model class to query from.
+#labels Documentation
+=Generic content retrieval=
 
-To resolve this, `template_utils` provides a tag library called `generic_content`, which includes three tags for retrieving objects from _any_ model you happen to have installed.
+A common task in Django applications is writing template tags which
+retrieve particular pieces of content; for example, a weblog might
+need a "get latest entries" tag, while a news site would want "get
+latest stories", and so on. Writing these tags to work only with
+specific models results in duplication of code across applications, so
+`template_utils` provides a set of template tags which can retrieve
+content from any installed model, according to certain criteria.
 
-===get_latest_object===
+To use these tags, you'll need to have `template_utils` in your
+`INSTALLED_APPS` list, and you'll need to have `{% load
+generic_content %}` in your template.
 
-This tag retrieves the latest object from a model, using the model's default ordering. The syntax looks like this:
+==get_latest_object==
+
+This tag retrieves the "latest" object from a model, according to the
+model's default ordering.
+
+Syntax:
 
 {{{
 {% get_latest_object [app_name].[model_name] as [varname] %}
 }}}
 
-So to retrieve the latest `FreeComment` posted and store it in a variable called `latest_comment`:
+So, for example, to retrieve the latest `FreeComment` posted:
 
 {{{
 {% get_latest_object comments.freecomment as latest_comment %}
 }}}
 
-===get_latest_objects===
+==get_latest_objects==
 
-This tag retrieves the "latest" objects from a model, using the model's default ordering. The syntax looks like this:
+Similar to `get_latest_object`, but takes an additional argument --
+a number -- and returns a list of that many objects.
+
+Syntax:
 
 {{{
 {% get_latest_objects [app_name].[model_name] [num] as [varname] %}
 }}}
 
-So, for example, to retrieve the five latest `FreeComment` objects and put them into a context variable called `latest_comments`:
+Continuing with comments as an example:
 
 {{{
 {% get_latest_objects comments.freecomment 5 as latest_comments %}
 }}}
 
-===get_random_object===
+==get_random_object==
 
-This tag retrieves a random object from a model, using `order_by('?')`. The syntax looks like this:
+Retrieves a single object, randomly selected, from a model.
+
+Syntax:
 
 {{{
 {% get_random_object [app_name].[model_name] as [varname] %}
 }}}
 
-So to retrieve a random `FreeComment` and store it in the context variable `random_comment`:
+So to retrieve a random comment:
 
 {{{
 {% get_random_object comments.freecomment as random_comment %}
 }}}
 
-===get_random_objects==
+==get_random_objects==
 
-This tag retrieves a number of objects, randomly selected, from any model; under the hood, it uses `order_by('?')` to get objects randomly ordered.
+Much like `get_latest_objects`, this tag returns a given number of
+objects (randomly selected).
 
-The syntax looks like this:
-
-{{{
-{% get_random_objects [app_name].[model_name] [num] as [varname] %}
-}}}
-
-So, for example, to retrieve five random comments (using the `FreeComment` model) and put them into a context variable called `random_comments`:
+Syntax:
 
 {{{
-{% get_random_objects comments.freecomment 5 as random_comments %}
+{% get_random_object [app_name].[model_name] as [varname] %}
 }}}
 
-===retrieve_object===
+==retrieve_object==
 
-This tag retrieves a specific object from a specific model by primary-key lookup, making it easy to have, for example, an instance of a model which gets displayed on every page of a site. The syntax looks like this:
+Retrieves a single specific object by primary-key lookup.
+
+Syntax:
 
 {{{
 {% retrieve_object [app_name].[model_name] [primary_key] as [varname] %}
 }}}
 
-So to retrieve, say, the flat page object with `id` 12 into the context variable `my_flatpage`, you would do:
+For example, if you wanted to retrieve a flatpage with `id` 12:
 
 {{{
 {% retrieve_object flatpages.flatpage 12 as my_flatpage %}
