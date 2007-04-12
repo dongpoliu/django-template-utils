@@ -45,5 +45,5 @@ Currently, five main components are bundled into `template_utils`:
   * Template tags for [http://code.google.com/p/django-template-utils/wiki/GenericContentTags generic content retrieval].
   * Template tags for [http://code.google.com/p/django-template-utils/wiki/ComparisonTags robust comparison operations].
   * Template tags for [http://code.google.com/p/django-template-utils/wiki/PublicCommentTags retrieving public comments] (for when a comment-moderation system is in use).
-  * A [http://code.google.com/p/django-template-utils/wiki/GenericMarkup generic text-to-HTML conversion system] with template filter support].
+  * A [http://code.google.com/p/django-template-utils/wiki/GenericMarkup generic text-to-HTML conversion system] with template filter support.
   * A system for generating [http://code.google.com/p/django-template-utils/wiki/SettingsContextProcessor template context processors] which can add arbitrary settings to template contexts.
